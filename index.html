@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+   font-family: sans-serif;
+   font-size: 12px;
+}
+
+.node {
+   stroke: #fff;
+   stroke-width: 1.5px;
+}
+
+.link {
+   stroke: #999;
+   stroke-opacity: .6;
+}
+text {
+   font-family: sans-serif;
+   font-size: 10px;
+}
+path {
+   stroke-width: 1;
+   stroke: grey;
+   fill: none;
+   opacity: .2;
+}
+
+path.highlight {
+   stroke-width: 1;
+   opacity: 1;
+   fill: none;
+}
+
+path.is-from-true {
+   stroke: red;
+}
+
+path.is-from-false {
+   stroke: blue;
+}
+
+
+
+</style>
+<body>
+<!-- script src="parse.js"></script -->
+
+<div id="svg1"></div>
+<div id="controls"></div>
+<div id="result"></div>
+
+<script src="lib/d3.min.js"></script>
+<script src="lib/jquery.js"></script>
+<script src="lib/underscore-min.js"></script>
+<script src="graph.js?asdkjfhasdfd"></script>
+
+<!-- 
+<div>
+<h2><span class="mw-headline" id="Tier_0_.28Primal_aspects.29">Tier 0 (Primal aspects)</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/index.php?title=List_of_Aspects&amp;action=edit&amp;section=2" title="Edit section: Tier 0 (Primal aspects)">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<table border="1" class="mw-collapsible wikitable" style="width:100%;">
+  <tbody><tr>
+	  <th scope="col" style="width: 100px;">Aspect Symbol
+	  </th>
+	  <th scope="col" style="width: 100px;">Aspect Name
+	  </th>
+	  <th scope="col"><span class="mw-collapsible-toggle mw-collapsible-toggle-expanded" tabindex="0">&nbsp;[<a href="#">Collapse</a>]&nbsp;</span>Found in
+	</th></tr>
+	<tr style="display: table-row;">
+	  <td style="text-align:center;">Aer
+	  </td>
+	  <td style="text-align:center;">Aer(AH-er)Air
+	  </td>
+	  <td> Sugar, Sugarcane, Tall Grass, Air Shard, Feather, Chicken, Fern, music disc, Bat, Block of Aluminum
+	</td></tr>
+	<tr style="display: table-row;">
+	  <td style="text-align:center;">Aqua
+	  </td>
+	  <td style="text-align:center;">Aqua(AH-qwah)Water
+	  </td>
+	  <td> Sugar, Sugarcane, Cactus, Lilypad, Fish, Clay, Water Bucket, Water Shard, Iron Tank Wall/Gauge/Valve
+	</td></tr>
+	<tr style="display: table-row;">
+	  <td style="text-align:center;">Ignis
+	  </td>
+	  <td style="text-align:center;">Ignis(IG-nis)Fire
+	  </td>
+	  <td> Coal, Coal Coke, Blaze Rod, Cinderpearl, Obsidian, Netherrack, Brick, Coal Dust, Fire Shard, Lava Bucket, Gunpowder, Furnace
+	</td></tr>
+	<tr style="display: table-row;">
+	  <td style="text-align:center;">Ordo
+	  </td>
+	  <td style="text-align:center;">Ordo(OR-do)Order
+	  </td>
+	  <td> Lead Ingot, Lead Block, Steel Ingot, Steel Block, Crucible, Order Shard, Smooth Sandstone, Quarried Block, Silverwood Logs, Division Sigil, Hoe of Growth, Chiseled Stone Bricks
+	</td></tr>
+	<tr style="display: table-row;">
+	  <td style="text-align:center;">Perditio
+	  </td>
+	  <td style="text-align:center;">Perditio(Pehr-DI-ti-o)Entropy
+	  </td>
+	  <td> Cobblestone, Sandstone, Sand, Cactus, Dead Bush, Most kinds of Dusts, Entropy Shard
+	</td></tr>
+	<tr style="display: table-row;">
+	  <td style="text-align:center;">Terra
+	  </td>
+	  <td style="text-align:center;">Terra(TEH-ra)Earth
+	  </td>
+	  <td> Dirt, Grass, Sand, Earth Shard, Gravel, Clay, Apatite ore,  Roots, Cows, Hardened Sand, Donkey, Horse, Mud
+</td></tr></tbody></table>
+<h2><span class="mw-headline" id="Tier_1">Tier 1</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/index.php?title=List_of_Aspects&amp;action=edit&amp;section=3" title="Edit section: Tier 1">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<table border="1" class="mw-collapsible wikitable" style="width:100%;">
+  <tbody><tr>
+	  <th scope="col" style="width: 100px;">Aspect Symbol
+	  </th>
+	  <th scope="col" style="width: 100px;">Aspect Name
+	  </th>
+	  <th scope="col" style="min-width: 150px; width: 150px;">Components
+	  </th>
+	  <th scope="col"><span class="mw-collapsible-toggle mw-collapsible-toggle-expanded" tabindex="0">&nbsp;[<a href="#">Collapse</a>]&nbsp;</span>Found in
+	</th></tr>
+	<tr style="display: table-row;">
+	  <td style="text-align:center;">Gelum
+	  </td>
+	  <td style="text-align:center;">Gelum(GEH-lum)Ice
+	  </td>
+	  <td>Aqua + Ordo Ignis + Perditio (on 4.1.1.13)
+	  </td>
+	  <td> Snow, Ice, Snowball
+	</td></tr>
+	<tr style="display: table-row;">
+	  <td style="text-align:center;">Lux
+	  </td>
+	  <td style="text-align:center;">Lux(Lucks)Light
+	  </td>
+	  <td>Aer + Ignis
+	  </td>
+	  <td> Glowstone, Glowstonedust, Torch, Quarried Stone
+	</td></tr>
+	<tr style="display: table-row;">
+	  <td style="text-align:center;">Motus
+	  </td>
+	  <td style="text-align:center;">Motus(MO-tus)Movement
+	  </td>
+	  <td>Aer + Aqua 
+	  </td>
+	  <td> Door, Rubber Bar, Rubber, Trapdoor, Piston, Sticky Piston
+	</td></tr>
+	<tr style="display: table-row;">
+	  <td style="text-align:center;">Potentia
+	  </td>
+	  <td style="text-align:center;">Potentia(Po-TEN-ti-a)Power
+	  </td>
+	  <td>Ordo + Ignis
+	  </td>
+	  <td> Coal Dust, Coal, Coal Coke, Redstone, Nether Quartz
+	</td></tr>
+	<tr style="display: table-row;">
+	  <td style="text-align:center;">Saxum
+	  </td>
+	  <td style="text-align:center;">Saxum(SAHX-um)Stone
+	  </td>
+	  <td>Terra + Terra
+	  </td>
+	  <td> Stone, Cobblestone, Sandstone, Smooth Sandstone, Chsiseled Sandstone, Sandstone Slab, TConstruct Sandstone Bricks
+	</td></tr>
+	<tr style="display: table-row;">
+	  <td style="text-align:center;">Vacuos
+	  </td>
+	  <td style="text-align:center;">Vacuos(VAH-cu-os)Void
+	  </td>
+	  <td>Aer + Perditio
+	  </td>
+	  <td> Chest, Void, Iron Tank Wall/Valve/Gauge, Bowl, Stone Barrel, Deep Storage Unit
+	</td></tr>
+	<tr style="display: table-row;">
+	  <td style="text-align:center;">Victus
+	  </td>
+	  <td style="text-align:center;">Victus(VIK-tus)Life
+	  </td>
+	  <td>Aqua + Terra
+	  </td>
+	  <td> Rose, Flower, Egg, Fish, Pork, Raw Beef, Raw Porkchop, Fibrous Taint, Barley
+</td></tr></tbody></table>
+<h2><span class="mw-headline" id="Tier_2">Tier 2</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/index.php?title=List_of_Aspects&amp;action=edit&amp;section=4" title="Edit section: Tier 2">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<table border="1" class="mw-collapsible mw-collapsed wikitable" style="width:100%;">
+  <tbody><tr>
+	  <th scope="col" style="width: 100px;">Aspect Symbol
+	  </th>
+	  <th scope="col" style="width: 100px;">Aspect Name
+	  </th>
+	  <th scope="col" style="min-width: 150px; width: 150px;">Components
+	  </th>
+	  <th scope="col"><span class="mw-collapsible-toggle mw-collapsible-toggle-collapsed" tabindex="0">&nbsp;[<a href="#">Expand</a>]&nbsp;</span>Found in
+	</th></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Bestia
+	  </td>
+	  <td style="text-align:center;">Bestia(BAYS-ti-ah)Animal, Beast
+	  </td>
+	  <td>Motus + Victus
+	  </td>
+	  <td> Leather, Raw Beef, String, Egg, Raw Pork, Raw Chicken, Chicken (mob), Cow (mob), Pig (mob)
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Fames
+	  </td>
+	  <td style="text-align:center;">Fames(FAH-mays)Hunger
+	  </td>
+	  <td>Victus + Vacuos
+	  </td>
+	  <td> Apple, Wheat, Bread, Bucket of Milk, Potato, Cooked Potato, Carrot, Cooked Chicken, Steak
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Granum
+	  </td>
+	  <td style="text-align:center;">Granum(GRAH-num)Seed
+	  </td>
+	  <td>Victus + Ordo 
+	  </td>
+	  <td> Seeds, Saplings, Egg
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Iter
+	  </td>
+	  <td style="text-align:center;">Iter(EE-tehr)Journey
+	  </td>
+	  <td>Motus + Terra
+	  </td>
+	  <td> Boat, Ender Pearl (4), Fence Gate, Minecart, Saddle, Netherportal
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Limus
+	  </td>
+	  <td style="text-align:center;">Limus(LEE-mus)Slime
+	  </td>
+	  <td>Victus + Aqua
+	  </td>
+	  <td> Slimeball, Raw Rubber, Tainted Goo
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Metalum
+	  </td>
+	  <td style="text-align:center;">Metallum(Meh-TAL-lum)Metal
+	  </td>
+	  <td>Saxum + Ordo
+	  </td>
+	  <td> Almost every Ingot and metal Ore, Iron Tank Wall/Gauge/Valve,
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Mortuus
+	  </td>
+	  <td style="text-align:center;">Mortuus(Mor-TOO-us)Death
+	  </td>
+	  <td>Victus + Perditio
+	  </td>
+	  <td> Bone, Zombie Brain, Rotten Flesh, Potion of Harming
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Permutatio
+	  </td>
+	  <td style="text-align:center;">Permutatio(Pehr-moo-TAH-ti-o)Exchange
+	  </td>
+	  <td>
+		Perditio + Ordo  
+	  </td>
+	  <td> Transformation Powder, Copper Ingot, Shimmerleaf, Hopper, Quicksilver
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Praecantatio
+	  </td>
+	  <td style="text-align:center;">Praecantatio(Prai-cahn-TAH-ti-o)Magic
+	  </td>
+	  <td>Vacuos + Potentia
+	  </td>
+	  <td> Cinderpearl, Crucible, Transformation Powder, Shards, Greatwood and Silverwood Logs, Mossy Cobblestone, Nether Wart, Blaze Rod, Chiseled Sandstone
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Sano
+	  </td>
+	  <td style="text-align:center;">Sano(SAH-no)Healing
+	  </td>
+	  <td>Victus + Victus
+	  </td>
+	  <td> Potion(s) of Healing, Bucket of Milk, Milk, Cake, Golden Apple
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Tempestas
+	  </td>
+	  <td style="text-align:center;">Tempestas(Tem-PES-tas)Storm
+	  </td>
+	  <td>Aer + Motus 
+	  </td>
+	  <td> Cloud
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Tenebrae
+	  </td>
+	  <td style="text-align:center;">Tenebrae(Teh-NEH-brae)Darkness
+	  </td>
+	  <td>Vacuos + Lux
+	  </td>
+	  <td> Mushrooms, Obsidian, Obsidian Tile, Obsidian Totem
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Vinculum
+	  </td>
+	  <td style="text-align:center;">Vinculum(VIN-coo-lum)Trap
+	  </td>
+	  <td>Motus + Perditio
+	  </td>
+	  <td> Soul Sand, Amber, Amber Bearing Stone, Cobweb
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Vitreus
+	  </td>
+	  <td style="text-align:center;">Vitreus(VI-treh-us)Crystal
+	  </td>
+	  <td> Terra + Ordo
+	  </td>
+	  <td> Diamond, Tin Ore, Tin Ingot, Tin Dust, Nether Quartz, Amber, Shards, Glass
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Volatus
+	  </td>
+	  <td style="text-align:center;">Volatus(Vo-LAH-tus)Flight
+	  </td>
+	  <td>Aer + Motus
+	  </td>
+	  <td> Feather, Cloud, Bow, Arrow
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Tempus
+	  </td>
+	  <td style="text-align:center;">(MB) Tempus(TEM-pus)Time
+	  </td>
+	  <td>Vacuos + Ordo
+	  </td>
+	  <td> Repeater, Clock
+</td></tr></tbody></table>
+<h2><span class="mw-headline" id="Tier_3">Tier 3</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/index.php?title=List_of_Aspects&amp;action=edit&amp;section=5" title="Edit section: Tier 3">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<table border="1" class="mw-collapsible mw-collapsed wikitable" style="width:100%;">
+  <tbody><tr>
+	  <th scope="col" style="width: 100px;">Aspect Symbol
+	  </th>
+	  <th scope="col" style="width: 100px;">Aspect Name
+	  </th>
+	  <th scope="col" style="min-width: 150px; width: 150px;">Components
+	  </th>
+	  <th scope="col"><span class="mw-collapsible-toggle mw-collapsible-toggle-collapsed" tabindex="0">&nbsp;[<a href="#">Expand</a>]&nbsp;</span>Found in
+	</th></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Alienis
+	  </td>
+	  <td style="text-align:center;">Alienis(Ah-li-AY-nis)Strange, Alien
+	  </td>
+	  <td>Vacuos + Tenebrae
+	  </td>
+	  <td> Ender Pearl, Obsidian Totem, Runic Matrix
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Auram
+	  </td>
+	  <td style="text-align:center;">Auram(OW-rahm)Aura
+	  </td>
+	  <td>Praecantatio + Aer
+	  </td>
+	  <td>  Ethereal Essence (Wisps, Broken Nodes)
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Corpus
+	  </td>
+	  <td style="text-align:center;">Corpus(COR-pus)Body
+	  </td>
+	  <td>Mortuus + Bestia
+	  </td>
+	  <td> Rotten Flesh, Beef, Porkchops, Fish, Chicken, Bone, Zombie Brain
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Exanimis
+	  </td>
+	  <td style="text-align:center;">Exanimis(Ex-AH-ni-mis)Resurrection
+	  </td>
+	  <td>Motus + Mortuus
+	  </td>
+	  <td> Ethereal Essences, Ghast Tears, Monster Spawners, Zombie Brains, Skeleton Head
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Herba
+	  </td>
+	  <td style="text-align:center;">Herba(HEHR-bah)Plant
+	  </td>
+	  <td>
+		Victus + Terra 
+	  </td>
+	  <td> Seeds, Saplings, Sugarcane, Leaf Blocks, Nether Wart, Grass Block
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Spiritus
+	  </td>
+	  <td style="text-align:center;">Spiritus(SPEE-ri-tus)Spirit, Soul
+	  </td>
+	  <td>Victus + Mortuus
+	  </td>
+	  <td> Soul Sand, Ghast Tear, Zombie Head
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Venenum
+	  </td>
+	  <td style="text-align:center;">Venenum(Veh-NAY-num)Poison
+	  </td>
+	  <td>Aqua + Mortuus
+	  </td>
+	  <td> Spider eye, Quicksilver, Poisoned potato, Potion of Poison
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Vitium
+	  </td>
+	  <td style="text-align:center;">Vitium(VIH-tee-um)Taint
+	  </td>
+	  <td>Praecantatio + Perditio
+	  </td>
+	  <td> Taintacle, Fibrous taint, Tainted Goo
+</td></tr></tbody></table>
+<h2><span class="mw-headline" id="Tier_4">Tier 4</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/index.php?title=List_of_Aspects&amp;action=edit&amp;section=6" title="Edit section: Tier 4">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<table border="1" class="mw-collapsible mw-collapsed wikitable" style="width:100%;">
+  <tbody><tr>
+	  <th scope="col" style="width: 100px;">Aspect Symbol
+	  </th>
+	  <th scope="col" style="width: 100px;">Aspect Name
+	  </th>
+	  <th scope="col" style="min-width: 150px; width: 150px;">Components
+	  </th>
+	  <th scope="col"><span class="mw-collapsible-toggle mw-collapsible-toggle-collapsed" tabindex="0">&nbsp;[<a href="#">Expand</a>]&nbsp;</span>Found in
+	</th></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Arbor
+	  </td>
+	  <td style="text-align:center;">Arbor(AR-bor)Wood
+	  </td>
+	  <td>Aer + Herba 
+	  </td>
+	  <td> Stick, Wood Planks, Wood Slabs, Tools, Wood Logs
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Cognitio
+	  </td>
+	  <td style="text-align:center;">Cognitio(Cog-NIH-ti-o)Thought, Mind
+	  </td>
+	  <td>Terra + Spiritus
+	  </td>
+	  <td> Paper, Books, Zombie Brain, Knowledge Fragment, Experience Orb, Thaumonocon
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Sensus
+	  </td>
+	  <td style="text-align:center;">Sensus(SEN-sus)Sense
+	  </td>
+	  <td>Aer + Spiritus
+	  </td>
+	  <td> Ink Sac, Lapis Lazuli, Lapis Lazuli Ore, Lapis Lazuli Block, Rose, Flowers, Bone Meal, Carrots, Spider Eye, Cocoa Beans
+</td></tr></tbody></table>
+<h2><span class="mw-headline" id="Tier_5">Tier 5</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/index.php?title=List_of_Aspects&amp;action=edit&amp;section=7" title="Edit section: Tier 5">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<table border="1" class="mw-collapsible mw-collapsed wikitable" style="width:100%;">
+  <tbody><tr>
+	  <th scope="col" style="width: 100px;">Aspect Symbol
+	  </th>
+	  <th scope="col" style="width: 100px;">Aspect Name
+	  </th>
+	  <th scope="col" style="min-width: 150px; width: 150px;">Components
+	  </th>
+	  <th scope="col"><span class="mw-collapsible-toggle mw-collapsible-toggle-collapsed" tabindex="0">&nbsp;[<a href="#">Expand</a>]&nbsp;</span>Found in
+	</th></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Humanus
+	  </td>
+	  <td style="text-align:center;">Humanus(Hoo-MAH-nus)Human
+	  </td>
+	  <td>Bestia + Cognitio
+	  </td>
+	  <td> Rotten Flesh, Villager (mob), Skeleton (mob), Zombie (mob)
+</td></tr></tbody></table>
+<h2><span class="mw-headline" id="Tier_6">Tier 6</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/index.php?title=List_of_Aspects&amp;action=edit&amp;section=8" title="Edit section: Tier 6">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<table border="1" class="mw-collapsible mw-collapsed wikitable" style="width:100%;">
+  <tbody><tr>
+	  <th scope="col" style="width: 100px;">Aspect Symbol
+	  </th>
+	  <th scope="col" style="width: 100px;">Aspect Name
+	  </th>
+	  <th scope="col" style="min-width: 150px; width: 150px;">Components
+	  </th>
+	  <th scope="col"><span class="mw-collapsible-toggle mw-collapsible-toggle-collapsed" tabindex="0">&nbsp;[<a href="#">Expand</a>]&nbsp;</span>Found in
+	</th></tr>
+
+	<tr style="display: none;">
+	  <td style="text-align:center;">Instrumentum
+	  </td>
+	  <td style="text-align:center;">Instrumentum(In-struh-MEN-tum)Tool
+	  </td>
+	  <td>
+		Humanus + Ordo 
+	  </td>
+	  <td> Flint, Shovels and Axes (pre 4.1). Steel, Shovels and Axes (post 4.1.)
+	</td></tr>
+
+	<tr style="display: none;">
+	  <td style="text-align:center;">Lucrum
+	  </td>
+	  <td style="text-align:center;">Lucrum(LOO-crum)Greed
+	  </td>
+	  <td>Humanus + Fames
+	  </td>
+	  <td> Emerald, Diamond, Gold Ingot, Gold Block, Silver, Taintacle
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Messis
+	  </td>
+	  <td style="text-align:center;">Messis(MESS-iss)Crop
+	  </td>
+	  <td> Herba + Humanus
+	  </td>
+	  <td> Wheat, Bread, Potatoes, Carrot, Apple, Barley
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Perfodio
+	  </td>
+	  <td style="text-align:center;">Perfodio(Pehr-FOH-di-o)Dig, Mine
+	  </td>
+	  <td>
+		Humanus + Terra
+	  </td>
+	  <td> Pickaxes
+</td></tr></tbody></table>
+<h2><span class="mw-headline" id="Tier_7">Tier 7</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/index.php?title=List_of_Aspects&amp;action=edit&amp;section=9" title="Edit section: Tier 7">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<table border="1" class="mw-collapsible mw-collapsed wikitable" style="width:100%;">
+  <tbody><tr>
+	  <th scope="col" style="width: 100px;">Aspect Symbol
+	  </th>
+	  <th scope="col" style="width: 100px;">Aspect Name
+	  </th>
+	  <th scope="col" style="min-width: 150px; width: 150px;">Components
+	  </th>
+	  <th scope="col"><span class="mw-collapsible-toggle mw-collapsible-toggle-collapsed" tabindex="0">&nbsp;[<a href="#">Expand</a>]&nbsp;</span>Found in
+	</th></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Fabrico
+	  </td>
+	  <td style="text-align:center;">Fabrico(FAH-bri-co)Create, Build
+	  </td>
+	  <td>Humanus + Instrumentum
+	  </td>
+	  <td> Crafting Table, Anvil, Wool, Cooked Chicken, Steak, Bed
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Machina
+	  </td>
+	  <td style="text-align:center;">Machina(MAH-ki-na)Machine
+	  </td>
+	  <td>Motus + Instrumentum
+	  </td>
+	  <td> Button, Lever, Door, Redstone, Pressure Pads, Hopper, Redstone Comparator, Redstone repeater
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Meto
+	  </td>
+	  <td style="text-align:center;">Meto(MEH-to)Harvest, Reap
+	  </td>
+	  <td>Messis + Instrumentum 
+	  </td>
+	  <td> Shears, Hoes
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Pannus
+	  </td>
+	  <td style="text-align:center;">Pannus(PAN-nus)Fabric
+	  </td>
+	  <td>Instrumentum + Bestia
+	  </td>
+	  <td> Leather, Wool, String, Bed
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Telum
+	  </td>
+	  <td style="text-align:center;">Telum(TAY-lum)Weapon
+	  </td>
+	  <td>Instrumentum + Perditio
+	  </td>
+	  <td> Bow, Arrow, Sword
+	</td></tr>
+	<tr style="display: none;">
+	  <td style="text-align:center;">Tutamen
+	  </td>
+	  <td style="text-align:center;">Tutamen(Tu-TAH-men)Armor
+	  </td>
+	  <td>Instrumentum + Terra
+	  </td>
+	  <td> Helmets, Chest, Leggings, Boots, Leather, Potion of Fire Resistance
+</td></tr></tbody></table>
+</div>
+-->
+
+</body>
+</html>
