@@ -237,7 +237,7 @@ function createSelectors (nodeData) {
 				var tierTotal = 0;
 				_.each(goodPath, function (aspect){
 					//console.log(aspect, nodes[nodeMap[aspect]].tier +1);
-					tierTotal += (nodes[nodeMap[aspect]].tier +1);
+					tierTotal += (nodes[nodeMap[aspect]].tierId +1);
 				});
 				goodPath.push(tierTotal);
 			});
